@@ -2,4 +2,4 @@
 アマゾン(日本)の購入履歴を取得するChrome拡張機能
 
 # アプリのイメージ
-![アプリのイメージ](screenshot.png)
+![アプリのイメージ](doc/screenshot.png)

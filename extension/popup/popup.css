@@ -1,0 +1,26 @@
+body {
+  width: 400px;
+  padding: 1em;
+}
+
+#download {
+  display: none
+}
+
+.app-flex {
+  display:flex;
+}
+
+.app-flex-v-center {
+  align-items: center;
+}
+
+.app-flex-1 {
+  flex:1;
+}
+
+.app-github {
+  width: 24px;
+  height: 24px;
+}
+
