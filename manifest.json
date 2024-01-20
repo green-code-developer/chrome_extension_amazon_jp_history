@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "アマゾン購入履歴取得ツール",
+  "description": "アマゾンの購入履歴を取得しCSV化します。",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "js": ["content/background.js"],
+      "matches": ["https://www.amazon.co.jp/your-orders/orders*"]
+    }
+  ]
+}
