@@ -1,8 +1,10 @@
 
 // popup から履歴取得ボタン押下時
 chrome.runtime.onMessage.addListener(async function(request, sender, sendResponse) {
-  const result = parseOnePage()
-  sendResponse(result)
+  if (request.action == 'parse') {
+    const result = parseOnePage()
+    sendResponse(result)
+  }
 })
 
 // 1ページ分の履歴を解析
@@ -52,11 +54,3 @@ function findNextPageUrl() {
   })
   return nextEl ? nextEl.href : ''
 }
-
-// ページ読み込み完了したら即時にページを解析してpopup へ通知
-// 2ページ目以降に使用
-(async function() {
-  const result = parseOnePage()
-  await chrome.runtime.sendMessage(result);
-  console.log('[AW] sent')
-})()

@@ -2,7 +2,7 @@
 アマゾン(日本)の購入履歴を取得するChrome拡張機能
 
 # アプリのイメージ
-![アプリのイメージ](doc/screenshot.jpg)
+![アプリのイメージ](doc/screenshot.png)
 
 # 謝辞
 SJIS 変換にencoding.js を使わせていただきました。

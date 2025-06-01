@@ -46,10 +46,11 @@ button, select {
 }
 
 .operation .item .num {
-  width:50px;
+  width:40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: .5em;
 }
 .operation .item .description {
   flex:1;
@@ -93,6 +94,7 @@ button, select {
   border:none;
   padding: .5em;
   width: 14em;
+  text-align:center;
 }
 
 button:hover, select:hover {

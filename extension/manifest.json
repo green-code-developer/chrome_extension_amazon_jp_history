@@ -3,16 +3,41 @@
   "name": "アマゾン購入履歴取得ツール",
   "description": "アマゾンの購入履歴を取得しCSV化します。",
   "version": "1.2",
-  "permissions": [],
+  "permissions": [
+    "scripting",
+    "tabs",
+    "webNavigation",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://www.amazon.co.jp/your-orders/orders*"
+  ],
   "action": {
     "default_popup": "popup/popup.html",
     "default_icon": "popup/logo_96.png"
   },
+  "background": {
+    "service_worker": "background/background.js",
+    "type": "module"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "background/lib/encoding-japanese@2.2.0/encoding.min.js"
+      ],
+      "matches": [
+        "https://www.amazon.co.jp/*"
+      ]
+    }
+  ],
   "content_scripts": [
     {
-      "run_at": "document_end",
-      "js": ["content/background.js"],
-      "matches": ["https://www.amazon.co.jp/your-orders/orders*"]
+      "js": [
+        "background/content.js"
+      ],
+      "matches": [
+        "https://www.amazon.co.jp/your-orders/orders*"
+      ]
     }
   ]
 }
