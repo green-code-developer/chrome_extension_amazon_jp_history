@@ -71,7 +71,12 @@ chrome.runtime.onMessage.addListener(async function(request, sender, sendRespons
 
 // 終了処理、ファイルダウンロード
 function finish() {
-  const csv = toCsv(result)
+  let csv = toCsv(result)
+  const isSjis = document.querySelector('#encoding').value == 'sjis'
+  // 必要なら sjis 変換
+  if (isSjis) {
+    csv = toSjis(csv)
+  }
   handleDownload(csv, "download.csv")
   reset()
 }
@@ -94,6 +99,15 @@ function toCsv(arr) {
   return res.join('\n')
 }
 
+function toSjis(csv) {
+  const sjisArray = Encoding.convert(Encoding.stringToCode(csv), {
+    to: 'SJIS',
+    from: 'UNICODE',
+    type: 'array'
+  })
+  return new Uint8Array(sjisArray)
+}
+
 function toCsvColumn(text) {
   return '"' + (text ? text : '').replace(/\"/g, '""') + '"'
 }
@@ -101,16 +115,23 @@ function toCsvColumn(text) {
 function handleDownload(content, fileName) {
   // こちら参考にさせてもらった
   // https://qiita.com/wadahiro/items/eb50ac6bbe2e18cf8813
-  var blob = new Blob([ content ], { "type" : "text/plain" });
-
+  const blob = new Blob([ content ], { "type" : "application/octet-stream" })
   if (window.navigator.msSaveBlob) { 
-    window.navigator.msSaveBlob(blob, fileName); 
+    window.navigator.msSaveBlob(blob, fileName)
     // msSaveOrOpenBlobの場合はファイルを保存せずに開ける
-    window.navigator.msSaveOrOpenBlob(blob, fileName); 
+    window.navigator.msSaveOrOpenBlob(blob, fileName)
   } else {
-    const downloadEl = document.getElementById("download")
-    downloadEl.href = window.URL.createObjectURL(blob);
-    downloadEl.download = fileName
-    downloadEl.click()
+    const a = document.createElement('a')
+    a.href = window.URL.createObjectURL(blob)
+    a.download = fileName
+    a.click();
   }
+}
+
+function isWin() {
+  return 0 <= navigator.platform.toLowerCase().indexOf('win')
+}
+
+if (!isWin()) {
+  document.getElementById('encoding').value = 'utf8'
 }

@@ -5,25 +5,76 @@
   </head>
   <body>
     <div class="app-flex app-flex-v-center">
-      <h3 class="app-flex-1">日本アマゾン購入履歴CSV取得</h3>
+      <h3 class="app-flex-1 title">アマゾン(日本)購入履歴CSV取得</h3>
+      <!-- <h6 class="updated-at">更新日:2025/5/29</h6> -->
       <div>
         <a target="_blank" href="https://github.com/green-code-developer/chrome_extension_amazon_jp_history.git">
           <img class="app-github" src="github-mark.svg"/>
         </a>
       </div>
     </div>
-    <h6>更新日:2024/1/25</h6>
-    <div>
-      <h4>使い方</h4>
-      <div>1. こちらをクリックして<button id="goto-history-button">アマゾンの履歴ページ</button>へ遷移します</div>
-      <div>2. ログインしていない場合はログインしてください</div>
-      <div>3. 取得対象の年を選択します。年を選択後に再度このポップアップを表示してください</div>
-      <div>4. <button id="collect-button">履歴収集</button>をクリックします</div>
-      <div>5. 1ページずつ自動的に履歴情報を収集します。最終ページまで収集するとファイルがダウンロードされます</div>
-      <div>※  ダウンロードが完了するまでポップアップを開いたままお待ちください</div>
-      <div>※  しばらく待ってもダウンロードされない場合は1. からやり直してください</div>
+    
+    <div class="operation">
+      <div class="item">
+        <div class="num">
+          <span class="circle-number">1</span>
+        </div>
+        <div class="description">
+          <div class="left">
+            <button id="goto-history-button">アマゾンの履歴ページへ</button>
+          </div>
+          <div class="right">
+            <div>
+              <div>操作中にこのポップアップが閉じてしまった場合は開き直してください</div>
+              <div>ログインしていない場合はログインしてください</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="num">
+          <span class="circle-number">2</span>
+        </div>
+        <div class="description">
+          <div class="right">
+            <div>
+              <div>注文履歴画面の「過去3ヶ月」を取得したい年に変更します</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="num">
+          <span class="circle-number">3</span>
+        </div>
+        <div class="description">
+          <div class="left">
+            <select id="encoding">
+              <option value="sjis">windowsの方(SJIS)</option>
+              <option value="utf8">その他の方(UTF8)</option>
+            </select>
+          </div>
+          <div class="right">必要に応じて、文字コードを変更してください</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="num">
+          <span class="circle-number">4</span>
+        </div>
+        <div class="description">
+          <div class="left">
+            <button id="collect-button">収集開始</button>
+          </div>
+          <div class="right">
+            <div>
+              <div>ダウンロードが完了するまでポップアップを開いたままお待ちください</div>
+              <div>しばらく待ってもダウンロードされない場合はChrome を再起動してください</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <a id="download" href="#" download="">ダウンロード</a>
     <script src="popup.js"></script>
+    <script src="lib/encoding-japanese@2.2.0/encoding.min.js"></script>
   </body>
 </html>
