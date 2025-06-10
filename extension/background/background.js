@@ -106,7 +106,7 @@ const Encoding = globalThis.Encoding;
 
   // ダウンロード
   function handleDownload(content, fileName) {
-    const base64 = btoa(String.fromCharCode(...content));
+    const base64 = base64FromUint8Array(content)
     const url = `data:application/octet-stream;base64,${base64}`;
     chrome.downloads.download({
       url: url,
@@ -121,3 +121,14 @@ const Encoding = globalThis.Encoding;
     })
   }
 })()
+
+// 内容が大きくなっても処理できるように分割処理
+function base64FromUint8Array(uint8Array) {
+  let binary = '';
+  const chunkSize = 0x8000; // 32KB ずつ処理
+  for (let i = 0; i < uint8Array.length; i += chunkSize) {
+    const chunk = uint8Array.subarray(i, i + chunkSize);
+    binary += String.fromCharCode(...chunk);
+  }
+  return btoa(binary);
+}
