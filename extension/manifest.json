@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "アマゾン購入履歴取得ツール",
   "description": "アマゾンの購入履歴を取得しCSV化します。",
-  "version": "1.3",
+  "version": "1.4",
   "permissions": [
     "scripting",
     "tabs",
