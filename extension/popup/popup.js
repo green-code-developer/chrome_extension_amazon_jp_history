@@ -15,7 +15,7 @@ document.querySelector('#collect-button').addEventListener('click', async () => 
 })
 
 // windows でなければUTF8 を初期選択状態とする
-const isWin = 0 <= navigator.platform.toLowerCase().indexOf('win')
+const isWin = 0 <= navigator.userAgentData?.platform?.toLowerCase().indexOf('win')
 if (!isWin) {
   document.getElementById('encoding').value = 'utf8'
 }
